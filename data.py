@@ -1,6 +1,3 @@
-import pygame
-from pygame.locals import *
-
 BLUE = (0, 0, 255)
 ERASE = (255, 255, 255)
 WHITE = (255, 255, 255)
@@ -11,12 +8,6 @@ MAGENTA = (255, 0, 255)
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 FILL = False
-
-pygame.init()
-
-screen = pygame.display.set_mode((800, 600))
-
-e = pygame.event.wait()
 
 click_id_list = {0o001, 0o002, 0o003}
 

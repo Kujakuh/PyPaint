@@ -1,9 +1,16 @@
+# External Libs
 import sys
 import cv2
+import pygame
+from pygame.locals import *
+
+# Locals
 from assets import *
-from click_events import *
+from data import *
 
 pygame.init()
+screen = pygame.display.set_mode((800, 600))
+e = pygame.event.wait()
 
 
 # UI ------------------------------------------------------------------------------------------
@@ -46,7 +53,7 @@ class Button:
                         erase_on = False
                     circle_color = color_dict[self.click_event]
                 elif self.click_event == 0o001:
-                    clean(screen)
+                    self.surface.fill(ERASE, (0, 0, 800, 450))  # Canvas erase
                 elif self.click_event == 0o002:
                     if FILL:
                         FILL = False
@@ -78,22 +85,22 @@ def round_line(srf, paint, start, end, l_width, rad=1):
         pygame.draw.circle(srf, paint, (x, y), rad, l_width)
 
 
-def draw(col):
+def draw(color):
     global e, draw_on, last_post
     if e.type == pygame.MOUSEBUTTONDOWN:
         draw_on = True
         (x, y) = e.pos
         if draw_on and y < 450 and not FILL:
-            pygame.draw.circle(screen, col, e.pos, radius, line_width)
+            pygame.draw.circle(screen, color, e.pos, radius, line_width)
         elif draw_on and y < 450 and FILL:
-            bucket(screen, e.pos, col)
+            bucket(screen, e.pos, color)
     if e.type == pygame.MOUSEBUTTONUP:
         draw_on = False
     if e.type == pygame.MOUSEMOTION:
         (x, y) = e.pos
         if draw_on and y < 450 and not FILL:
-            pygame.draw.circle(screen, col, e.pos, radius, line_width)
-            round_line(screen, col, e.pos, last_post, line_width, radius)
+            pygame.draw.circle(screen, color, e.pos, radius, line_width)
+            round_line(screen, color, e.pos, last_post, line_width, radius)
         last_post = e.pos
 
 
@@ -111,6 +118,7 @@ def main():
         for e in pygame.event.get():
 
             sub_window_render()
+
             clean_button = Button(screen, clean_img, (750, 500), (50, 50), 0o001, e)
             paint_bucket = Button(screen, bucket_button, (180, 490), (36, 36), 0o002, e)
             red = Button(screen, red_button, (255, 490), (35, 35), 0o302, e)

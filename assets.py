@@ -21,6 +21,3 @@ a_3 = str(img_folder_path / 'a3.png')
 a_4 = str(img_folder_path / 'a4.png')
 a_5 = str(img_folder_path / 'a5.png')
 a_6 = str(img_folder_path / 'a6.png')
-
-color_assets_list1 = {red_button, green_button, blue_button}
-color_assets_list2 = {cyan_button, yellow_button, magenta_button}
